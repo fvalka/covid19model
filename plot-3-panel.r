@@ -157,7 +157,7 @@ make_plots <- function(data_country, covariates_country_long,
     scale_fill_manual(name = "", labels = c("50%", "95%"),
                       values = c(alpha("deepskyblue4", 0.55), 
                                  alpha("deepskyblue4", 0.45))) + 
-    theme_pubr() + 
+    theme_pubr(base_family="sans") + 
     theme(axis.text.x = element_text(angle = 45, hjust = 1), 
           legend.position = "None") + ggtitle(country) +
     guides(fill=guide_legend(ncol=1))
@@ -240,6 +240,28 @@ make_plots <- function(data_country, covariates_country_long,
     theme(legend.position="right")
   if (country == 'United Kingdom')
     country = 'United_Kingdom'
+  # Special plot settings for mobile
+  p3_mobile <- p3  +
+    theme(legend.position="below")
+  
+  # Plots for Web, Desktop version
+  dir.create("web/figures/desktop/", showWarnings = FALSE, recursive = TRUE)
+  save_plot(filename = paste0("web/figures/desktop/", country, "_infections", ".svg"), 
+            p1, base_height = 4, base_asp = 1.618)
+  save_plot(filename = paste0("web/figures/desktop/", country, "_deaths", ".svg"), 
+            p2, base_height = 4, base_asp = 1.618)
+  save_plot(filename = paste0("web/figures/desktop/", country, "_rt", ".svg"), 
+            p3, base_height = 4, base_asp = 1.618 * 2)
+  
+  # Plots for Web, Mobile version
+  dir.create("web/figures/mobile/", showWarnings = FALSE, recursive = TRUE)
+  save_plot(filename = paste0("web/figures/mobile/", country, "_infections", ".svg"), 
+            p1, base_height = 4, base_asp = 1.1)
+  save_plot(filename = paste0("web/figures/mobile/", country, "_deaths", ".svg"), 
+            p2, base_height = 4, base_asp = 1.1)
+  save_plot(filename = paste0("web/figures/mobile/", country, "_rt", ".svg"), 
+            p3_mobile, base_height = 4, base_asp = 1.1)
+  
   # Special plot settings for mobile
   p3_mobile <- p3  +
     theme(legend.position="below")

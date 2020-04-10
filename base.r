@@ -23,6 +23,10 @@ countries <- c(
   "Netherlands"
 )
 
+# Default run parameters for the model
+DEBUG = FALSE
+FULL = FALSE
+
 args = commandArgs(trailingOnly=TRUE)
 if(length(args) == 0) {
   args = 'base'
@@ -197,6 +201,8 @@ m = stan_model(paste0('stan-models/',StanModel,'.stan'))
 
 if(DEBUG) {
   fit = sampling(m,data=stan_data,iter=40,warmup=20,chains=2)
+} else if (FULL) {
+  fit = sampling(m,data=stan_data,iter=4000,warmup=2000,chains=8,thin=4,control = list(adapt_delta = 0.90, max_treedepth = 10))
 } else { 
   # uncomment the line below for a full run to replicate results and comment the second line below 
   # fit = sampling(m,data=stan_data,iter=4000,warmup=2000,chains=4,thin=4,control = list(adapt_delta = 0.95, max_treedepth = 10))
