@@ -1,4 +1,3 @@
-library(ggplot2)
 library(tidyr)
 library(dplyr)
 library(rstan)
@@ -13,6 +12,7 @@ library(ggpubr)
 library(bayesplot)
 library(cowplot)
 library(svglite)
+library(ggplot2)
 
 source("utils/geom-stepribbon.r")
 #---------------------------------------------------------------------------
@@ -187,7 +187,7 @@ make_plots <- function(data_country, covariates_country_long,
                                  alpha("deepskyblue4", 0.45))) + 
     ylab("Daily number of deaths\n") + 
     xlab("") +
-    theme_pubr() + 
+    theme_pubr(base_family="sans") + 
     theme(axis.text.x = element_text(angle = 45, hjust = 1), 
           legend.position = "None") + 
     guides(fill=guide_legend(ncol=1))
@@ -235,7 +235,7 @@ make_plots <- function(data_country, covariates_country_long,
                  limits = c(data_country$time[1], 
                             data_country$time[length(data_country$time)])) + 
     scale_y_continuous(expand = expansion(mult=c(0,0.1))) + 
-    theme_pubr() + 
+    theme_pubr(base_family="sans") + 
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     theme(legend.position="right")
   if (country == 'United Kingdom')
