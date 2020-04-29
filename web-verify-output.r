@@ -64,6 +64,11 @@ verify_web_output <- function(){
   print("Writing latest updates")
   dir.create("web/data/", showWarnings = FALSE, recursive = TRUE)
   write_json(date_results, "web/data/latest-updates.json", auto_unbox=TRUE)
+
+  print("Copy CSV result files")
+  dir.create("web/csv_results/", showWarnings = FALSE, recursive = TRUE)
+  flist <- list.files("results/", "^.+[.]csv$", full.names = TRUE, ignore.case = TRUE)
+  file.copy(flist, "web/csv_results/")
 }
 
 print("Verifying web output")
