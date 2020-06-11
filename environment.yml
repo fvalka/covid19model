@@ -13,5 +13,14 @@ dependencies:
   - r-abind
   - r-svglite
   - r-jsonlite
+  - r-abind
+  - r-zoo
+  - r-gtable
+  - r-ggrepel
+  - r-scales
+  - r-stringr
+  - r-ggplot2
+  - r-ggstance
+  - r-gridextra
 channels:
   - conda-forge
